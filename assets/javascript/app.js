@@ -10,4 +10,10 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-var trainArray = [];
+var database = firebase.database();
+
+var train;
+var destination;
+var firsTime;
+var freqMins;
+
