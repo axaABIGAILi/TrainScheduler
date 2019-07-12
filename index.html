@@ -12,20 +12,13 @@
         </div>
         <div id="current-sched">
             <header><h2>Current Schedule</h2></header>
-            <table class="table">
+            <table class="table" id="train-tbl">
                 <tr>
                     <th scope="col">Train Name</th>
                     <th scope="col">Destination</th>
                     <th scope="col">Frequency (min)</th>
                     <th scope="col">Next Arrival</th>
                     <th scope="col">Minutes Away</th>
-                </tr>
-                <tr>
-                    <td>Thomas the Tank Engine</td>
-                    <td>Sodor Island</td>
-                    <td>20</td>
-                    <td>x</td>
-                    <td>x</td>
                 </tr>
 
             </table>
@@ -38,18 +31,23 @@
                 <input type="text" class="form-control" id="new-train-dest">
                 <label for="train-first">First Time</label>
                 <input type="text" class="form-control" id="new-train-first">
-                <label for="train-freq">Frequency</label>
+                <label for="train-freq">Frequency (mins)</label>
                 <input type="text" class="form-control" id="new-train-freq">
-                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                <button id="submitbtn" type="submit" class="btn btn-outline-primary">Submit</button>
             </div>
         
         </div>
-    
+    <!--Link to necessary firebase SDKs-->
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+    <!--jQuery link-->
     <script
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
+    <!--Momentjs link-->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!--javascript link-->
     <script src="assets/javascript/app.js"></script>
     </body>
 </html>
