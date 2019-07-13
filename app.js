@@ -23,9 +23,6 @@ var train;
 var destination;
 var firsTime;
 var freqMins;
-//var trainMins;
-//var nextArr;
-//var remaining;
 
 // add input trains to table
 $('#submitbtn').on('click', function(event){
@@ -60,26 +57,27 @@ database.ref().on("child_added", function(childSnapshot) {
   var destination = childSnapshot.val().destination;
   var firsTime = childSnapshot.val().first;
   var freqMins = childSnapshot.val().frequency;
+  var nexArr;
+  var trainMins;
+  var remaining;
 
-  var maxMoment = moment().max(moment(), firsTime);
+  var firsTimeTemp = moment(firsTime, "hh:mm A"); // store the firsTime string var as a time object
+  var maxMoment = moment.max(moment(), firsTimeTemp);
 
-  if (maxMoment === moment(firsTime, 'hh:mm A')) {
-    var nexArr = firsTime;
-    var firsTime = parseInt(firsTime.split(":")[1][0] + firsTime.split(':')[1][1]);
-    freqMins = parseInt(freqMins);
-    var trainMins = moment().diff(firsTime, 'minutes');
-    var remaining = trainMins % freqMins;
+  if (maxMoment === firsTimeTemp) {
+    nexArr = firsTime; // firsTime becomes the 1st next arrival since the 1st train hasn't arrived yet
+    remaining = firsTimeTemp.diff(moment().startOf("m"), 'minutes');
   } else {
-    var firsTime = parseInt(firsTime.split(":")[1][0] + firsTime.split(':')[1][1]);
+    firsTime = parseInt(firsTime.split(":")[1][0] + firsTime.split(':')[1][1]);
     freqMins = parseInt(freqMins);
 
-    var trainMins = moment().diff(firsTime, 'minutes');
-    var remaining = trainMins % freqMins;
-    var minsLeft = freqMins - remaining;
-    var nexArr = moment().add(minsLeft, 'm').format('hh:mm A');
+    trainMins = moment().diff(firsTime, 'minutes');
+    remaining = trainMins % freqMins;
+    nexArr = remaining = freqMins - remaining;
+    nexArr = moment().add(nexArr, 'm').format('hh:mm A');
   }
 
-  $('#train-tbl').append('<tr><td>'+train+'</td><td>'+destination+'</td><td>'+freqMins+'</td><td>'+nexArr+'</td><td>'+minsLeft+'</td></tr>')
+  $('#train-tbl').append('<tr><td>'+train+'</td><td>'+destination+'</td><td>'+freqMins+'</td><td>'+nexArr+'</td><td>'+remaining+'</td></tr>')
 
 });
 
